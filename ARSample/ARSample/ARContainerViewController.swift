@@ -17,8 +17,11 @@ class ARContainerViewController: UIViewController {
     
     var arView: ARView!
     
+    var sphere: VirtureObject?
     
     var coachingOverlay = ARCoachingOverlayView()
+    
+    var sphereCardAnchor: AnchorEntity?
     
     // MARK: - ライフサイクル
     
@@ -108,6 +111,8 @@ class ARContainerViewController: UIViewController {
         
         config.planeDetection = [.horizontal]
         
+        config.detectionImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)
+        
         arView.session.run(config, options: [.removeExistingAnchors, .resetTracking])
     }
     
@@ -126,6 +131,56 @@ class ARContainerViewController: UIViewController {
     
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
         return false
+    }
+    
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        for anchor in anchors {
+            guard let imageAnchor = anchor as? ARImageAnchor else {
+                continue
+            }
+            
+            guard let name = imageAnchor.name else {
+                continue
+            }
+            
+            guard let detectedImage = detectedImage(rawValue: name) else {
+                continue
+            }
+            
+            switch detectedImage {
+            case .sphpereCard:
+                sphereCardIsDetected(imageAnchor: imageAnchor)
+                break
+                
+            case .lightCard:
+                break
+            }
+        }
+    }
+    
+    func sphereCardIsDetected(imageAnchor: ARImageAnchor) {
+        sphereCardAnchor?.removeFromParent()
+        
+        sphereCardAnchor = AnchorEntity(anchor: imageAnchor)
+        
+        arView.scene.addAnchor(sphereCardAnchor!)
+        
+        var transform = Transform(matrix: imageAnchor.transform)
+        transform.translation.y += 0.1
+        
+        let modelAnchor = AnchorEntity(world: transform.matrix)
+        sphere = VirtureObject(modelAnchor: modelAnchor)
+        
+        sphere?.loadModel(name: "Sphere", nameExtension: "usdz", completion: { [weak self] isSuccessed in
+            if isSuccessed {
+                self?.arView.scene.addAnchor(modelAnchor)
+            }
+        })
+        
+    }
+    
+    func sphereCardIsUpdated() {
+        
     }
     
 }
@@ -156,6 +211,31 @@ extension ARContainerViewController: ARSessionDelegate {
         coachingOverlay.activatesAutomatically = true
         
         coachingOverlay.goal = .horizontalPlane
+    }
+    
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        for anchor in anchors {
+            
+            guard let imageAnchor = anchor as! ARImageAnchor else {
+                continue
+            }
+            
+            guard let name = imageAnchor.name else {
+                continue
+            }
+            
+            guard let detectedImage = detectedImage(rawValue: name) else {
+                continue
+            }
+            
+            switch detectedImage {
+            case .sphpereCard:
+                sphereCardIsUpdated()
+                break
+            case .lightCard:
+                break
+            }
+        }
     }
     
 }

@@ -17,6 +17,8 @@
 		8C3A0E062A867D3000E0C1C6 /* ARSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A0E052A867D3000E0C1C6 /* ARSampleUITestsLaunchTests.swift */; };
 		8C3A0E132A8686F400E0C1C6 /* ARContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A0E122A8686F400E0C1C6 /* ARContainerViewController.swift */; };
 		8C3A0E152A86898C00E0C1C6 /* VirtureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A0E142A86898C00E0C1C6 /* VirtureObject.swift */; };
+		8C3A0E172A86928000E0C1C6 /* Sphere.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 8C3A0E162A86928000E0C1C6 /* Sphere.usdz */; };
+		8C3A0E192A86956800E0C1C6 /* DetectedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A0E182A86956800E0C1C6 /* DetectedImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		8C3A0E052A867D3000E0C1C6 /* ARSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8C3A0E122A8686F400E0C1C6 /* ARContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARContainerViewController.swift; sourceTree = "<group>"; };
 		8C3A0E142A86898C00E0C1C6 /* VirtureObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtureObject.swift; sourceTree = "<group>"; };
+		8C3A0E162A86928000E0C1C6 /* Sphere.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sphere.usdz; sourceTree = "<group>"; };
+		8C3A0E182A86956800E0C1C6 /* DetectedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +108,10 @@
 				8C3A0DE82A867D2D00E0C1C6 /* ContentView.swift */,
 				8C3A0E122A8686F400E0C1C6 /* ARContainerViewController.swift */,
 				8C3A0E142A86898C00E0C1C6 /* VirtureObject.swift */,
+				8C3A0E182A86956800E0C1C6 /* DetectedImage.swift */,
 				8C3A0DEA2A867D2D00E0C1C6 /* Experience.rcproject */,
 				8C3A0DEC2A867D3000E0C1C6 /* Assets.xcassets */,
+				8C3A0E162A86928000E0C1C6 /* Sphere.usdz */,
 				8C3A0DEE2A867D3000E0C1C6 /* Preview Content */,
 			);
 			path = ARSample;
@@ -241,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3A0DF02A867D3000E0C1C6 /* Preview Assets.xcassets in Resources */,
+				8C3A0E172A86928000E0C1C6 /* Sphere.usdz in Resources */,
 				8C3A0DED2A867D3000E0C1C6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3A0DE92A867D2D00E0C1C6 /* ContentView.swift in Sources */,
+				8C3A0E192A86956800E0C1C6 /* DetectedImage.swift in Sources */,
 				8C3A0DE72A867D2D00E0C1C6 /* AppDelegate.swift in Sources */,
 				8C3A0DEB2A867D2D00E0C1C6 /* Experience.rcproject in Sources */,
 				8C3A0E132A8686F400E0C1C6 /* ARContainerViewController.swift in Sources */,
