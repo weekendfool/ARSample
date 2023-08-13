@@ -180,7 +180,9 @@ class ARContainerViewController: UIViewController {
     }
     
     func sphereCardIsUpdated() {
-        
+        if let cardAnchor = self.sphereCardAnchor {
+            sphere?.modelAnchor.setPosition([0.0, 0.1, 0.0], relativeTo: cardAnchor)
+        }
     }
     
 }
@@ -216,7 +218,7 @@ extension ARContainerViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
         for anchor in anchors {
             
-            guard let imageAnchor = anchor as! ARImageAnchor else {
+            guard let imageAnchor = anchor as? ARImageAnchor else {
                 continue
             }
             
