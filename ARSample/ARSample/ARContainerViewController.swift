@@ -23,6 +23,12 @@ class ARContainerViewController: UIViewController {
     
     var sphereCardAnchor: AnchorEntity?
     
+    // 光源
+    var light: PointLight?
+    
+    var lightAnchor: AnchorEntity?
+    var lightImage: AnchorEntity?
+    
     // MARK: - ライフサイクル
     
     override func loadView() {
@@ -153,6 +159,7 @@ class ARContainerViewController: UIViewController {
                 break
                 
             case .lightCard:
+                lightCardIsDetected(imageAnchor: imageAnchor)
                 break
             }
         }
@@ -183,6 +190,34 @@ class ARContainerViewController: UIViewController {
         if let cardAnchor = self.sphereCardAnchor {
             sphere?.modelAnchor.setPosition([0.0, 0.1, 0.0], relativeTo: cardAnchor)
         }
+    }
+    
+    func lightCardIsDetected(imageAnchor: ARImageAnchor) {
+        // 既存のものは削除
+        self.lightAnchor?.removeFromParent()
+        
+        // アンカーの生成
+        self.lightImage = AnchorEntity(anchor: imageAnchor)
+    
+        
+        self.arView.scene.addAnchor(self.lightImage!)
+        
+        // 点光源の生成
+        var transform = Transform(matrix: imageAnchor.transform)
+        transform.translation += 0.15
+        
+        self.lightAnchor = AnchorEntity(world: transform.matrix)
+        
+        self.light = PointLight()
+        
+        self.light?.light = PointLightComponent(color: .red, intensity: 1700, attenuationRadius: 5)
+        
+        self.lightAnchor?.addChild(self.light!)
+        self.arView.scene.addAnchor(self.lightAnchor!)
+    }
+    
+    func lightCardIsUpdated() {
+        lightAnchor?.setPosition([0.0, 0.15, 0.0], relativeTo: lightImage)
     }
     
 }
@@ -235,6 +270,7 @@ extension ARContainerViewController: ARSessionDelegate {
                 sphereCardIsUpdated()
                 break
             case .lightCard:
+                lightCardIsUpdated()
                 break
             }
         }
